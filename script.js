@@ -1,38 +1,34 @@
 console.log("inizio controllo esecuzione");
 
 let d = new Date();
-console.log(d);
-
-document.getElementById('saluto').innerHTML = "Oggi è il " + d;
-
-// array colori
-let colori = [];
+document.getElementById("saluto").innerHTML = "Oggi è il " + d;
 
 function elabora() {
-    let numero = document.getElementById('inNumber').value;
-    alert("il numero inserito è " + numero);
+    
+    let numero = document.getElementById("inNumber").value;
+    let testo = document.getElementById("inText").value;
 
-    let testo = document.getElementById('inText').value;
-    console.log(testo);
+    
+    alert("Il testo inserito è: " + testo);
 
-    if (numero > 255 || numero < 0) {
-        alert("non è corretto");
-        document.getElementById('error').innerHTML = numero;
+    
+    if (numero < 0 || numero > 255) {
+        document.getElementById("error").innerHTML =
+            "Errore: il numero deve essere compreso tra 0 e 255";
+        document.getElementById("outText").innerHTML = "Output";
     } else {
-        // nuovo alert con il testo della seconda casella
-        alert("Il testo inserito è: " + testo);
-
-        document.getElementById('outText').innerHTML = numero;
-
-        colori.push(numero);
-        console.log(colori);
+        document.getElementById("outText").innerHTML =
+            "Numero inserito: " + numero;
+        document.getElementById("error").innerHTML = "";
     }
 }
 
 function reset() {
-    document.getElementById('inNumber').value = "";
-    document.getElementById('inText').value = "";
+    // cancella caselle di input
+    document.getElementById("inNumber").value = "";
+    document.getElementById("inText").value = "";
 
-    // ripristina la scritta Output
-    document.getElementById('outText').innerHTML = "Output";
+    // cancella output ed errori
+    document.getElementById("outText").innerHTML = "Output";
+    document.getElementById("error").innerHTML = "";
 }
