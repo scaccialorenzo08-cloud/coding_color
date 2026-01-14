@@ -4,49 +4,47 @@ let d = new Date();
 document.getElementById("saluto").innerHTML = "Oggi è il " + d;
 
 
+function elabora() {
 
-let colori=[]
-let i=0;//conta il numero dei numeri inseriti
-
-
-function  elabora() {
-    
-    let numero = document.getElementById("inNumber").value;
+    let numeri = document.getElementById("inNumber").value;
     let testo = document.getElementById("inText").value;
+    let colori = numeri.split(" ");
 
     
-    alert("Il testo inserito è: " + testo);
+    if (colori.length !== 3) {
+        document.getElementById("error").innerHTML =
+            "Errore: inserisci 3 numeri";
+        return;
+    }
+
+    let r = Number(colori[0]);
+    let g = Number(colori[1]);
+    let b = Number(colori[2]);
 
     
-    if (numero < 0 || numero > 255) {
+    if (
+        r < 0 || r > 255 ||
+        g < 0 || g > 255 ||
+        b < 0 || b > 255 ||
+        isNaN(r) || isNaN(g) || isNaN(b)
+    ) {
         document.getElementById("error").innerHTML =
             "Errore: il numero deve essere compreso tra 0 e 255";
-        document.getElementById("outText").innerHTML = "Output";
-
-    } else {
-        document.getElementById("outText").innerHTML =
-            "Numero inserito: " + numero;
-        document.getElementById("error").innerHTML = "";
-        colori.push(numero);//inserisce numero dentro array colori
-        console.log(colori);
-        document.getElementById("outText").innerHTML += "<br> i colori sono " + colori
-        i++;
-        if(i==3) {
-            document.getElementById("outText").innerHTML =testo
-            document.getElementById("outText").style.color = `rgb(${colori[0]}, ${colori[1]}, ${colori[2]})`;
-        }
+        return;
     }
+
+    
+    document.getElementById("error").innerHTML = "";
+    document.getElementById("outText").innerHTML = testo;
+    document.getElementById("outText").style.color = `rgb(${r}, ${g}, ${b})`;
 }
 
-function reset() {colori = [];
+function reset() {
     // cancella caselle di input
     document.getElementById("inNumber").value = "";
     document.getElementById("inText").value = "";
-    document.getElementById("outText").value="";
-    i=0
-
     // cancella output ed errori
     document.getElementById("outText").innerHTML = "Output";
     document.getElementById("error").innerHTML = "";
-    document.getElementById("outText").innerHTML = "";//reset del colore
+    document.getElementById("outText").innerHTML = "";
 }
